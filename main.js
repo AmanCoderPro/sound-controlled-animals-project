@@ -7,12 +7,46 @@ function modelReady() {
     classifier.classify(gotResults);
 }
 
-function gotResult(error,  results) {
+function gotResults(error,  results) {
     if (error) {
         console.error(error);
     }
 
     else {
         console.log(results);
+
+        random_number_r = Math.floor(Math.random() * 255) + 1;
+        random_number_g = Math.floor(Math.random() * 255) + 1;
+        random_number_b = Math.floor(Math.random() * 255) + 1;
+
+        document.getElementById("result_label").innerHTML = 'I can hear - ' + results[0].label;
+        document.getElementById("result_confidence").innerHTML = 'Accuracy - ' + (results[0].confidence * 100).toFixed(2) + " %";
+        document.getElementById("result_label").style.color = "rgb("+random_number_r+", "+random_number_g+", "+random_number_b+")";
+        document.getElementById("result_confidence").style.color = "rgb("+random_number_r+", "+random_number_g+", "+random_number_b+")";
+
+        img = document.getElementById("animal1").innerHTML;
+        img1 = document.getElementById("animal2").innerHTML;
+        img2 = document.getElementById("animal3").innerHTML;
+        img3 = document.getElementById("animal4").innerHTML;
     }
+
+if (results[0].label == "Meowing") {
+  document.getElementById("result_label").innerHTML = "I can hear: Meowing"
+}
+ 
+else if (results[0].label == "Barking") {
+    document.getElementById("result_label").innerHTML = "I can hear: Barking"
+}
+
+else if (results[0].label == "Mooing") {
+    document.getElementById("result_label").innerHTML = "I can hear: Mooing"
+}
+
+else {
+    img.src = 'aliens-01.png';
+    img1.src = 'aliens-02.png';
+    img2.src = 'aliens-03.png';
+    img3.src = 'aliens-04.gif';
+}
+
 }
